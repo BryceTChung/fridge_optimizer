@@ -1,0 +1,11 @@
+To-Do
+1. Choose method of storing data
+    -txt file, excel sheet, database
+2. functions to read and write to storage
+3. Familiarize with tkinter
+4. simple gui
+5. methods to reccomend and track
+    -date/time 
+    -preference tags
+6. Integrate gui
+7.Polish
