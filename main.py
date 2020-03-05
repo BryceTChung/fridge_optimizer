@@ -41,7 +41,7 @@ def write_ingre():
             new = ""
             for x in i.tags:
                 tag_str = tag_str + str(x) + ","
-                new = tag_str[0:(len(tag_str)-1)]
+            new = tag_str[0:(len(tag_str)-1)]
             csv_row.append(new)
             
             writer.writerow(csv_row)
@@ -60,17 +60,21 @@ def read_recipe():
             #print(ingre_list_str)
             #print(len(ingre_list_str))
             while(x != len(ingre_list_str)-1):
+
                 print("x:",x)
                 if ingre_list_str[x] == ":":
-                    quantity = ""
+                    
                     ingre_quantity.append(ingre)
                     x+=1
                     while x <= len(ingre_list_str)-1 and ingre_list_str[x] != ",":
                         quantity = quantity + ingre_list_str[x]
                         x+=1
+                    x+=1
                     ingre_quantity.append(int(quantity))
+                    quantity = ""
                     ingre =""
                     recipe.ingredients.append(ingre_quantity)
+                    ingre_quantity =[]
                     if x >= len(ingre_list_str):
                         break
 
@@ -90,9 +94,28 @@ def read_recipe():
                     tag = tag + x
                 recipe.tags.append(tag)
                 break
-            #ingr.tags = i["tags"]
-
             recipe_list.append(recipe)
+
+def write_recipe():
+    field_names = ["name","ingredients","tags"]
+    with open("recipes.csv", "w",newline="") as new_file:
+        writer = csv.writer(new_file)
+        writer.writerow(field_names)
+        for i in recipe_list:
+            csv_row = []
+            csv_row.append(i.name)
+            ingre_str = ""
+            for x in i.ingredients:
+                ingre_str = ingre_str +str(x[0])+":"+str(x[1])+","
+            final = ingre_str[0:(len(ingre_str)-1)]
+            csv_row.append(final)
+            tag_str = ""
+            new = ""
+            for x in i.tags:
+                tag_str = tag_str + str(x) + ","
+                new = tag_str[0:(len(tag_str)-1)]
+            csv_row.append(new)
+            writer.writerow(csv_row)
 
 
 ingre_list = []
@@ -105,7 +128,9 @@ write_ingre()
 
 recipe_list = []
 read_recipe()
+write_recipe()
 for j in recipe_list:
     print(j.name)
+    print(len(j.ingredients))
     print(j.ingredients)
     print(j.tags)
