@@ -1,7 +1,7 @@
 import csv
 from ingredient_class import ingredient
+from recipe_class import recipe_class
 
-ingre_list = []
 def read_ingre():
     with open("ingredients.csv", "r") as csv_file:
         reader = csv.DictReader(csv_file)
@@ -45,9 +45,67 @@ def write_ingre():
             csv_row.append(new)
             
             writer.writerow(csv_row)
+
+def read_recipe():
+    with open("recipes.csv","r",newline="") as csv_file:
+        reader = csv.DictReader(csv_file)
+        for i in reader:
+            recipe = recipe_class()
+            recipe.name = i["name"]
+            ingre_list_str = i["ingredients"]
+            ingre =""
+            quantity = ""
+            ingre_quantity =[]
+            x=0
+            #print(ingre_list_str)
+            #print(len(ingre_list_str))
+            while(x != len(ingre_list_str)-1):
+                print("x:",x)
+                if ingre_list_str[x] == ":":
+                    quantity = ""
+                    ingre_quantity.append(ingre)
+                    x+=1
+                    while x <= len(ingre_list_str)-1 and ingre_list_str[x] != ",":
+                        quantity = quantity + ingre_list_str[x]
+                        x+=1
+                    ingre_quantity.append(int(quantity))
+                    ingre =""
+                    recipe.ingredients.append(ingre_quantity)
+                    if x >= len(ingre_list_str):
+                        break
+
+                ingre = ingre + ingre_list_str[x]
+                x +=1
+
+            tag_string = i["tags"]
+            tag = "" 
+            while True:
+                if type(tag_string) == type(None):
+                    break
+                for x in tag_string:
+                    if x == ',':
+                        recipe.tags.append(tag)
+                        tag = ""
+                        x=''
+                    tag = tag + x
+                recipe.tags.append(tag)
+                break
+            #ingr.tags = i["tags"]
+
+            recipe_list.append(recipe)
+
+
+ingre_list = []
 read_ingre()
 write_ingre()
-for j in ingre_list:
+# for j in ingre_list:
+#     print(j.name)
+#     print(j.expir_date)
+#     print(j.tags)
+
+recipe_list = []
+read_recipe()
+for j in recipe_list:
     print(j.name)
-    print(j.expir_date)
+    print(j.ingredients)
     print(j.tags)
