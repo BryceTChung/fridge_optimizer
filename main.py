@@ -129,8 +129,8 @@ write_ingre()
 recipe_list = []
 read_recipe()
 write_recipe()
-for j in recipe_list:
-    print(j.name)
-    print(len(j.ingredients))
-    print(j.ingredients)
-    print(j.tags)
+# for j in recipe_list:
+#     print(j.name)
+#     print(len(j.ingredients))
+#     print(j.ingredients)
+#     print(j.tags)
