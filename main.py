@@ -135,6 +135,6 @@ read_recipe()
 write_recipe()
 for j in recipe_list:
     print(j.name)
-    print(len(j.ingredients))
+    print("Num ingredients:", len(j.ingredients))
     print(j.ingredients)
     print(j.tags)
