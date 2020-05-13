@@ -30,8 +30,8 @@ def read_ingre():
 
 def write_ingre():
     field_names = ["name", "quantity", "expir_date", "tags"]
-
-    with open("ingredients.csv", "w") as new_file:
+    # newline=("") is needed to prevent blank lines being added to csv file, working as of python 3.8.2
+    with open("ingredients.csv", "w", newline=("")) as new_file:
         writer = csv.writer(new_file)
         writer.writerow(field_names)
         for i in ingre_list:
@@ -45,7 +45,6 @@ def write_ingre():
                 tag_str = tag_str + str(x) + ","
             new = tag_str[0:(len(tag_str)-1)]
             csv_row.append(new)
-
             writer.writerow(csv_row)
 
 
@@ -102,7 +101,8 @@ def read_recipe():
 
 def write_recipe():
     field_names = ["name", "ingredients", "tags"]
-    with open("recipes.csv", "w") as new_file:
+    # newline=("") is needed to prevent blank lines being added to csv file, working as of python 3.8.2
+    with open("recipes.csv", "w", newline=("")) as new_file:
         writer = csv.writer(new_file)
         writer.writerow(field_names)
         for i in recipe_list:
@@ -122,13 +122,15 @@ def write_recipe():
             writer.writerow(csv_row)
 
 
+# test code
 ingre_list = []
 read_ingre()
 write_ingre()
-# for j in ingre_list:
-#     print(j.name)
-#     print(j.expir_date)
-#     print(j.tags)
+for j in ingre_list:
+    print(j.name)
+    print(j.quantity)
+    print(j.expir_date)
+    print(j.tags)
 
 recipe_list = []
 read_recipe()
