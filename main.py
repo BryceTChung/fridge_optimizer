@@ -1,9 +1,11 @@
 import csv
+from tkinter import *
 from ingredient_class import ingredient
 from recipe_class import recipe_class
 
 
 def read_ingre():
+    print("reading ingredients...")
     with open("ingredients.csv", "r") as csv_file:
         reader = csv.DictReader(csv_file)
         for i in reader:
@@ -123,20 +125,37 @@ def write_recipe():
 
 
 # test code
+# ingre_list = []
+# read_ingre()
+# write_ingre()
+# for j in ingre_list:
+#     print(j.name)
+#     print(j.quantity)
+#     print(j.expir_date)
+#     print(j.tags)
+
+# recipe_list = []
+# read_recipe()
+# write_recipe()
+# for j in recipe_list:
+#     print(j.name)
+#     print("Num ingredients:", len(j.ingredients))
+#     print(j.ingredients)
+#     print(j.tags)
+
+
+# init root window
+root = Tk()
+title_label = Label(root, text="Fridge Optimizer")
+test = Label(root, text="test")
+title_label.grid(row=0, column=0)
+test.grid(row=1, column=1)
+
+myButton = Button(root, text="Click here", padx=20, pady=20, command=read_ingre) 
+myButton.grid()
+
+root.mainloop()
+
+# init ingredient list and read them in
 ingre_list = []
 read_ingre()
-write_ingre()
-for j in ingre_list:
-    print(j.name)
-    print(j.quantity)
-    print(j.expir_date)
-    print(j.tags)
-
-recipe_list = []
-read_recipe()
-write_recipe()
-for j in recipe_list:
-    print(j.name)
-    print("Num ingredients:", len(j.ingredients))
-    print(j.ingredients)
-    print(j.tags)
